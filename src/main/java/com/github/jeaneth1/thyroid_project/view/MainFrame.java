@@ -1,19 +1,26 @@
-package com.github.jeaneth1.thyroid_project.view;
+package com.github.jeaneth1.thyroid_project.view.InputPanel;
 
 import javax.swing.JFrame;
+import java.awt.BorderLayout;
+
 
 public class MainFrame extends JFrame {
     //The setup code goes inside a special method called constructor. 
+    private InputPanel inputPanel; //Decalre an instance variable 
     public MainFrame(){
         //Setup Code 
         //Setting up our Title
         setTitle("ThyroHealth - Thyroid Cancer Risk Assessment");
         //We have to set the size of the window width and heights in pixels
-        setSize(600, 400);
+        setSize(800, 600);
         //Close Operation 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //Allow the window to appear in the middle of the screen
         setLocationRelativeTo(null);
+
+        //Creating an instance of our InputPanel AND add input panel
+        inputPanel = newInputPanel();
+        add(inputPanel, BorderLayout.CENTER);
     }
 
 }
