@@ -1,232 +1,344 @@
-    // Ensure this package declaration matches the folder structure
-    package com.github.jeaneth1.thyroid_project.view;
+// Ensure this package declaration matches the folder structure
+package com.github.jeaneth1.thyroid_project.view;
 
-    // Import JPanel from the Swing library
+// Import JPanel from the Swing library
 import javax.swing.JPanel;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
-import javax.swing.ButtonGroup;  
+import javax.swing.ButtonGroup;
 import javax.swing.JButton; // Submit Button
 import java.awt.GridLayout; // for arranging components in grid
-import java.awt.FlowLayout; //arranging radio button within their own panel
+import java.awt.event.ActionListener;
+import java.awt.FlowLayout; //arranging radio button within their own panel\
+import java.awt.event.ActionEvent;
 
-    // We will import other components like JLabel, JTextField, JComboBox, JRadioButton, JButton, ButtonGroup later
+// We will import other components like JLabel, JTextField, JComboBox, JRadioButton, JButton, ButtonGroup later
+
+/**
+ * Panel to hold all the input fields for the user's health data.
+ */
+public class InputPanel extends JPanel implements ActionListener {
+
+    // age
+    private JLabel ageLabel;
+    private JTextField ageField;
+
+    // Gender
+    private JLabel genderLabel;
+    private JComboBox<String> genderComboBox;
+
+    // Smoking
+    private JLabel smokingLabel;
+    private JRadioButton smokingYesRadio;
+    private JRadioButton smokingNoRadio;
+    private JRadioButton smokingIdkRadio;
+    private ButtonGroup smokingGroup;
+
+    // IodineLabel
+    private JLabel iodineLabel;
+    private JComboBox<String> iodineComboBox;
+
+    // Obesity
+    private JLabel obesityLabel;
+    private JRadioButton obesityYesRadio;
+    private JRadioButton obesityNoRadio;
+    private JRadioButton obesityIdkRadio;
+    private ButtonGroup obesityGroup;
+
+    // RadiationLabel
+    private JLabel RadiationLabel;
+    private JRadioButton radiationYesRadio;
+    private JRadioButton radiationNoRadio;
+    private JRadioButton radiationIdkRadio;
+    private ButtonGroup radiationGroup;
+
+    // Diabetes Label
+    private JLabel diabetesLabel;
+    private JRadioButton diabetesYesRadio;
+    private JRadioButton diabetesNoRadio;
+    private JRadioButton diabetesIdkRadio;
+    private ButtonGroup diabetesGroup;
+
+    // family history
+
+    private JLabel familyhistory;
+    private JRadioButton yesfamilyhistory;
+    private JRadioButton nofamilyhistory;
+    private JRadioButton idkfamilyhistory;
+    private ButtonGroup familyHistoryButtonGroup;
+
+    // our submit Button
+
+    private JButton submitButton;
 
     /**
-     * Panel to hold all the input fields for the user's health data.
+     * Constructor: Sets up the panel and its components.
      */
-    public class InputPanel extends JPanel {
+    public InputPanel() {
+        // Create the actual layout manager for the panel
+        // Grid Layout parameters represent (rows, cols, hgap, vgap)
+        setLayout(new GridLayout(0, 2, 10, 10));
+        // So in the row 0 means as many as we need. gaps it 10px gaps
 
-        //age
-        private JLabel ageLabel;
-        private JTextField ageField;
+        // AGE Creation
+        ageLabel = new JLabel("Age");
+        add(ageLabel);
 
-        //Gender
-        private JLabel genderLabel;
-        private JComboBox <String> genderComboBox;
-        
-        //Smoking 
-        private JLabel smokingLabel;
-        private JRadioButton smokingYesRadio;
-        private JRadioButton smokingNoRadio;
-        private JRadioButton smokingIdkRadio;
-        private ButtonGroup smokingGroup;
+        ageField = new JTextField(5);
+        add(ageField);
 
-        //IodineLabel
-        private JLabel iodineLabel;
-        private JComboBox <String> iodineComboBox;
-
-        //Obesity
-        private JLabel obesityLabel;
-        private JRadioButton obesityYesRadio;
-        private JRadioButton obesityNoRadio;
-        private JRadioButton obesityIdkRadio;
-        private ButtonGroup obesityGroup;
-
-        //RadiationLabel
-        private JLabel RadiationLabel;
-        private JRadioButton radiationYesRadio;
-        private JRadioButton radiationNoRadio;
-        private JRadioButton radiationIdkRadio;
-        private ButtonGroup radiationGroup;
-        
-        // Diabetes Label
-        private JLabel diabetesLabel;
-        private JRadioButton diabetesYesRadio;
-        private JRadioButton diabetesNoRadio;
-        private JRadioButton diabetesIdkRadio;
-        private ButtonGroup diabetesGroup;
-        
-        //family history
-        
-        private JLabel familyhistory;
-        private JRadioButton yesfamilyhistory;
-        private JRadioButton nofamilyhistory;
-        private JRadioButton idkfamilyhistory;
-        private ButtonGroup familyHistoryButtonGroup;
-        
-        // our submit Button 
-
-        private JButton submitButton; 
-        /**
-         * Constructor: Sets up the panel and its components.
-         */
-        public InputPanel() {
-            // Create the actual layout manager for the panel
-            //Grid Layout parameters represent (rows, cols, hgap, vgap)
-            setLayout(new GridLayout(0,2,10,10)); 
-            // So in the row 0 means as many as we need. gaps it 10px gaps
-
-           //AGE Creation 
-           ageLabel= new JLabel("Age");
-           add(ageLabel);
-
-           ageField= new JTextField(5);
-           add(ageField);
-
-           //now lets create one for gender
-           genderLabel= new JLabel ("Gender");
-           add(genderLabel);
-           String [] genderOptions = {"-- Select --", "Male", "Female"};
-           genderComboBox= new JComboBox<>(genderOptions);
-           add(genderComboBox);
+        // now lets create one for gender
+        genderLabel = new JLabel("Gender");
+        add(genderLabel);
+        String[] genderOptions = { "-- Select --", "Male", "Female" };
+        genderComboBox = new JComboBox<>(genderOptions);
+        add(genderComboBox);
 
         // SMOKING CREATION
 
-        smokingLabel = new JLabel ("Smoking");
-        add (smokingLabel);
-        JPanel smokingRadioPanel = new JPanel(new FlowLayout(FlowLayout.LEFT,0,0));
+        smokingLabel = new JLabel("Smoking");
+        add(smokingLabel);
+        JPanel smokingRadioPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
-        smokingYesRadio = new JRadioButton ("Yes");
-        smokingNoRadio = new JRadioButton ("No");
-        smokingIdkRadio = new JRadioButton ("Idk");
+        smokingYesRadio = new JRadioButton("Yes");
+        smokingNoRadio = new JRadioButton("No");
+        smokingIdkRadio = new JRadioButton("Idk");
 
         // Group the radio buttons
 
-        smokingGroup = new ButtonGroup ();
-        smokingGroup.add (smokingYesRadio);
-        smokingGroup.add (smokingNoRadio);
-        smokingGroup.add (smokingIdkRadio);
-        
+        smokingGroup = new ButtonGroup();
+        smokingGroup.add(smokingYesRadio);
+        smokingGroup.add(smokingNoRadio);
+        smokingGroup.add(smokingIdkRadio);
+
         // add radio buttons to the panel
-        
-       smokingRadioPanel.add (smokingYesRadio);
-       smokingRadioPanel.add (smokingNoRadio);
-       smokingRadioPanel.add (smokingIdkRadio);
-       add (smokingRadioPanel);
 
-        
+        smokingRadioPanel.add(smokingYesRadio);
+        smokingRadioPanel.add(smokingNoRadio);
+        smokingRadioPanel.add(smokingIdkRadio);
+        add(smokingRadioPanel);
 
-        //Iodine Level 
-        
-        iodineLabel= new JLabel("Iodine Level: ");
+        // Iodine Level
+
+        iodineLabel = new JLabel("Iodine Level: ");
         add(iodineLabel);
 
-        String [] iodineOptions= {"-- Select --", "Low", "Normal", "High"};
-        iodineComboBox = new JComboBox <> (iodineOptions);
+        String[] iodineOptions = { "-- Select --", "Low", "Normal", "High" };
+        iodineComboBox = new JComboBox<>(iodineOptions);
         add(iodineComboBox);
-        
 
-        //Obesity Label
-        
-        obesityLabel = new JLabel ("Obesity");
-        add (obesityLabel);
+        // Obesity Label
 
-        //Creating the panel
-        JPanel obesityRadioPanel = new JPanel(new FlowLayout(FlowLayout.LEFT,0,0));
-        
-        obesityYesRadio = new JRadioButton ("Yes");
-        obesityNoRadio = new JRadioButton ("No");
-        obesityIdkRadio = new JRadioButton ("Idk");
+        obesityLabel = new JLabel("Obesity");
+        add(obesityLabel);
+
+        // Creating the panel
+        JPanel obesityRadioPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+
+        obesityYesRadio = new JRadioButton("Yes");
+        obesityNoRadio = new JRadioButton("No");
+        obesityIdkRadio = new JRadioButton("Idk");
 
         // Group obesity radio buttons
 
-        obesityGroup = new ButtonGroup ();
-        obesityGroup.add (obesityYesRadio);
-        obesityGroup.add (obesityNoRadio);
-        obesityGroup.add (obesityIdkRadio);
+        obesityGroup = new ButtonGroup();
+        obesityGroup.add(obesityYesRadio);
+        obesityGroup.add(obesityNoRadio);
+        obesityGroup.add(obesityIdkRadio);
 
         // Add obesity radio buttons to panel
-        
-        obesityRadioPanel.add (obesityYesRadio);
-        obesityRadioPanel.add (obesityNoRadio);
-        obesityRadioPanel.add (obesityIdkRadio);
-        add(obesityRadioPanel);
-        
-        //Radiation CREATION
-        RadiationLabel= new JLabel ("Radiation Exposure: ");
-        add(RadiationLabel);
-        JPanel radiationRadioPanel= new JPanel(new FlowLayout(FlowLayout.LEFT, 0,0));
-        radiationYesRadio = new JRadioButton("Yes");
-        radiationNoRadio= new JRadioButton("No");
-        radiationIdkRadio= new JRadioButton("I Don't Know");
-        radiationGroup= new ButtonGroup(); // creating our group
 
-        //adding to the group
+        obesityRadioPanel.add(obesityYesRadio);
+        obesityRadioPanel.add(obesityNoRadio);
+        obesityRadioPanel.add(obesityIdkRadio);
+        add(obesityRadioPanel);
+
+        // Radiation CREATION
+        RadiationLabel = new JLabel("Radiation Exposure: ");
+        add(RadiationLabel);
+        JPanel radiationRadioPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        radiationYesRadio = new JRadioButton("Yes");
+        radiationNoRadio = new JRadioButton("No");
+        radiationIdkRadio = new JRadioButton("I Don't Know");
+        radiationGroup = new ButtonGroup(); // creating our group
+
+        // adding to the group
         radiationGroup.add(radiationYesRadio);
         radiationGroup.add(radiationNoRadio);
         radiationGroup.add(radiationIdkRadio);
-        
-        //adding 
+
+        // adding
         radiationRadioPanel.add(radiationYesRadio);
         radiationRadioPanel.add(radiationNoRadio);
         radiationRadioPanel.add(radiationIdkRadio);
-        
+
         add(radiationRadioPanel);
-        
-        //  Diabetes Label
 
-        diabetesLabel = new JLabel ("Diabetes");
-        add (diabetesLabel);
-        JPanel diabetesRadioPanel = new JPanel(new FlowLayout(FlowLayout.LEFT,0,0));
+        // Diabetes Label
 
-        diabetesYesRadio = new JRadioButton ("yes");
-        diabetesNoRadio = new JRadioButton ("No");
-        diabetesIdkRadio = new JRadioButton ("Idk");
-        diabetesGroup = new ButtonGroup ();
+        diabetesLabel = new JLabel("Diabetes");
+        add(diabetesLabel);
+        JPanel diabetesRadioPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+
+        diabetesYesRadio = new JRadioButton("yes");
+        diabetesNoRadio = new JRadioButton("No");
+        diabetesIdkRadio = new JRadioButton("Idk");
+        diabetesGroup = new ButtonGroup();
         // Add diabetes radio buttons to the group
         diabetesGroup.add(diabetesYesRadio);
         diabetesGroup.add(diabetesNoRadio);
         diabetesGroup.add(diabetesIdkRadio);
-              
+
         diabetesRadioPanel.add(diabetesYesRadio);
         diabetesRadioPanel.add(diabetesNoRadio);
         diabetesRadioPanel.add(diabetesIdkRadio);
-        add (diabetesRadioPanel);
-        
-        //Family History Label 
-        familyhistory= new JLabel ("Family History with Thyroid cancer");
+        add(diabetesRadioPanel);
+
+        // Family History Label
+        familyhistory = new JLabel("Family History with Thyroid cancer");
         add(familyhistory);
-        JPanel familyHistoryRadioPanel= new JPanel(new FlowLayout(FlowLayout.LEFT,0,0));
-        yesfamilyhistory = new JRadioButton ("Yes");
+        JPanel familyHistoryRadioPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        yesfamilyhistory = new JRadioButton("Yes");
         nofamilyhistory = new JRadioButton("No");
         idkfamilyhistory = new JRadioButton("I don't know");
 
-            // Grouping
+        // Grouping
         familyHistoryButtonGroup = new ButtonGroup();
         familyHistoryButtonGroup.add(yesfamilyhistory);
         familyHistoryButtonGroup.add(nofamilyhistory);
         familyHistoryButtonGroup.add(idkfamilyhistory);
 
-             //add
+        // add
         familyHistoryRadioPanel.add(yesfamilyhistory);
         familyHistoryRadioPanel.add(nofamilyhistory);
         familyHistoryRadioPanel.add(idkfamilyhistory);
         add(familyHistoryRadioPanel);
-        
 
         // SUBMIT BUTTON
         add(new JLabel()); // Empty label for spacing in the first column
         submitButton = new JButton("Assess Risk");
+        submitButton.addActionListener(this);
         add(submitButton);
         // We will add an ActionListener to this button later to make it do something
-        }
 
-        // Later, we might add methods here to get the values from the input fields
-        // Example: public String getAge() { return ageField.getText(); }
     }
-    
 
+    // This is where we are going to listen to it our actionevent object
+    public void actionPerformed(ActionEvent e) {
+        // Check if the source of the event was our submitButton
+        if (e.getSource() == submitButton) {
+            System.out.println("Assess Risk button clicked!");
 
+            // 1. Get all the data from the input fields using the getter methods
+            String age = getAge();
+            String gender = getGender();
+            String smokingStatus = getSmokingStatus();
+            String iodineLevel = getIodineLevel();
+            String obesityStatus = getObesityStatus();
+            String radiationExposure = getRadiationExposureStatus();
+            String familyHistory = getFamilyHistoryStatus();
+
+            // 2. Print the collected data to the console for verification
+            System.out.println("--- User Input Data ---");
+            System.out.println("Age: " + age);
+            System.out.println("Gender: " + gender);
+            System.out.println("Smoking: " + smokingStatus);
+            System.out.println("Iodine Level: " + iodineLevel);
+            System.out.println("Obesity: " + obesityStatus);
+            System.out.println("Radiation Exposure: " + radiationExposure);
+            System.out.println("Family History: " + familyHistory);
+            System.out.println("-------------------------");
+
+            // TODO (Later Steps):
+            // 3. Validate this data.
+            // 4. Pass this data to a Controller object.
+        }
+    } // End of actionPerformed method
+
+    public String getAge() {
+        return ageField.getText().trim();
+    }
+
+    public String getGender() {
+        Object selectedItem = genderComboBox.getSelectedItem();
+        if (selectedItem != null) {
+            return selectedItem.toString();
+        }
+        return " --UnSelected --";
+    }
+
+    public String getIodineLevel() {
+        Object selectedItem = iodineComboBox.getSelectedItem();
+        if (selectedItem != null) {
+            return selectedItem.toString();
+        }
+        return "-- UnSelected --";
+    }
+
+    // Getsmoking
+    public String getSmokingStatus() {
+        if (smokingYesRadio.isSelected()) {
+            return "Yes";
+        } else if (smokingNoRadio.isSelected()) {
+            return "No";
+        } else if (smokingIdkRadio.isSelected()) {
+            return "I don't know";
+        } else {
+            return "Unselected";
+        }
+    }
+
+    public String getObesityStatus() {
+        if (obesityYesRadio.isSelected()) {
+            return "Yes";
+        } else if (obesityNoRadio.isSelected()) {
+            return "No";
+        } else if (obesityIdkRadio.isSelected()) {
+            return "Don't Know";
+        } else {
+            return "Unselected";
+        }
+    }
+
+    public String getRadiationExposureStatus() {
+        if (radiationYesRadio.isSelected()) {
+            return "Yes";
+        } else if (radiationNoRadio.isSelected()) {
+            return "No";
+        } else if (radiationIdkRadio.isSelected()) {
+            return "Don't Know";
+        } else {
+            return "Unselected";
+        }
+    }
+
+    public String getFamilyHistoryStatus() {
+        if (yesfamilyhistory.isSelected()) {
+            return "Yes";
+        } else if (nofamilyhistory.isSelected()) {
+            return "No";
+        } else if (idkfamilyhistory.isSelected()) {
+            return "Don't Know";
+        } else {
+            return "Unselected";
+        }
+    }
+
+    // Get diabetes
+    public String getdiabetesStatus() {
+        if (diabetesYesRadio.isSelected()) {
+            return "Yes";
+        } else if (diabetesNoRadio.isSelected()) {
+            return "No";
+        } else if (diabetesIdkRadio.isSelected()) {
+            return "I don't know";
+        } else {
+            return "Unselected";
+        }
+    }
+
+    // Later, we might add methods here to get the values from the input fields
+    // Example: public String getAge() { return ageField.getText(); }
+}
