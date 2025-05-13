@@ -1,4 +1,4 @@
-package com.github.jeaneth1.thyroid_project.view.InputPanel;
+package com.github.jeaneth1.thyroid_project.view;
 
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
@@ -19,8 +19,13 @@ public class MainFrame extends JFrame {
         setLocationRelativeTo(null);
 
         //Creating an instance of our InputPanel AND add input panel
-        inputPanel = newInputPanel();
+        inputPanel = new InputPanel();
         add(inputPanel, BorderLayout.CENTER);
+    }
+
+    // Method to create a new InputPanel instance
+    private InputPanel newInputPanel() {
+        return new InputPanel();
     }
 
 }
