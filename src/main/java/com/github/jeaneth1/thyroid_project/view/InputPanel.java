@@ -14,6 +14,8 @@ import java.awt.event.ActionListener;
 import java.awt.FlowLayout; //arranging radio button within their own panel\
 import java.awt.event.ActionEvent;
 
+import com.github.jeaneth1.thyroid_project.controller.AppController; // Import your AppController
+
 // We will import other components like JLabel, JTextField, JComboBox, JRadioButton, JButton, ButtonGroup later
 
 /**
@@ -73,10 +75,13 @@ public class InputPanel extends JPanel implements ActionListener {
 
     private JButton submitButton;
 
+    private AppController appController; 
+
     /**
      * Constructor: Sets up the panel and its components.
      */
-    public InputPanel() {
+    public InputPanel(AppController controller) {
+        this.appController = controller;
         // Create the actual layout manager for the panel
         // Grid Layout parameters represent (rows, cols, hgap, vgap)
         setLayout(new GridLayout(0, 2, 10, 10));
@@ -239,17 +244,22 @@ public class InputPanel extends JPanel implements ActionListener {
             String obesityStatus = getObesityStatus();
             String radiationExposure = getRadiationExposureStatus();
             String familyHistory = getFamilyHistoryStatus();
+            String diabetes= getdiabetesStatus();
 
-            // 2. Print the collected data to the console for verification
-            System.out.println("--- User Input Data ---");
-            System.out.println("Age: " + age);
-            System.out.println("Gender: " + gender);
-            System.out.println("Smoking: " + smokingStatus);
-            System.out.println("Iodine Level: " + iodineLevel);
-            System.out.println("Obesity: " + obesityStatus);
-            System.out.println("Radiation Exposure: " + radiationExposure);
-            System.out.println("Family History: " + familyHistory);
-            System.out.println("-------------------------");
+
+             // 2. Call the processUserData method on the appController, passing the collected data
+            if (appController != null) { // Good practice to check if controller is not null
+                appController.processUserData(
+                        age, gender, smokingStatus, iodineLevel,
+                        obesityStatus, radiationExposure, familyHistory, diabetes
+                        // Add diabetes data here if you have it
+                );
+            } else {
+                System.err.println("InputPanel: Error - AppController is not initialized!");
+            }
+
+            // We've removed the direct printing of data from here.
+            // The controller will print it for now.
 
             // TODO (Later Steps):
             // 3. Validate this data.
