@@ -81,7 +81,7 @@ public class InputPanel extends JPanel implements ActionListener {
      * Constructor: Sets up the panel and its components.
      */
     public InputPanel(AppController controller) {
-        this.appController = controller;
+        this.appController = controller; //It here 
         // Create the actual layout manager for the panel
         // Grid Layout parameters represent (rows, cols, hgap, vgap)
         setLayout(new GridLayout(0, 2, 10, 10));
@@ -232,6 +232,7 @@ public class InputPanel extends JPanel implements ActionListener {
 
     // This is where we are going to listen to it our actionevent object
     public void actionPerformed(ActionEvent e) {
+
         // Check if the source of the event was our submitButton
         if (e.getSource() == submitButton) {
             System.out.println("Assess Risk button clicked!");
@@ -248,8 +249,8 @@ public class InputPanel extends JPanel implements ActionListener {
 
 
              // 2. Call the processUserData method on the appController, passing the collected data
-            if (appController != null) { // Good practice to check if controller is not null
-                appController.processUserData(
+            if (this.appController != null) { // Good practice to check if controller is not null
+                this.appController.processUserData(
                         age, gender, smokingStatus, iodineLevel,
                         obesityStatus, radiationExposure, familyHistory, diabetes
                         // Add diabetes data here if you have it

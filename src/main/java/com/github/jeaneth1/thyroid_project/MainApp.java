@@ -9,12 +9,17 @@ public class MainApp {
        SwingUtilities.invokeLater(new Runnable(){
         @Override
         public void run(){
+            //Create the Controller and it doesn't know about the MainFrame yet
             AppController controller = new AppController();
 
-            //Create an instance of our main window class 
-            MainFrame mainFrame = new MainFrame(controller);
+            //Create an instance of our main window class and give IT a reference to the Controller
+            MainFrame mainFrameInstance = new MainFrame(controller);
+
+            //The controller doesn't have a reference to the MainFrame however this code will do this
+            //The controller can send messages/updates back to the mainframe
+            controller.setMainFrame(mainFrameInstance); //where the link is being made from App Controller
             //To make the frame visible we need to use this function
-            mainFrame.setVisible(true);
+            mainFrameInstance.setVisible(true);
         }
        });
     }
