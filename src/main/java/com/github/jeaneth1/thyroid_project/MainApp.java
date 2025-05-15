@@ -12,6 +12,9 @@ public class MainApp {
             //Create the Controller and it doesn't know about the MainFrame yet
             AppController controller = new AppController();
 
+            // Here: load your CSV
+            controller.loadCsvSimple("Demo.csv");
+
             //Create an instance of our main window class and give IT a reference to the Controller
             MainFrame mainFrameInstance = new MainFrame(controller);
 

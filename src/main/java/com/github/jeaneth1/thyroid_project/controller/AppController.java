@@ -5,6 +5,10 @@ import com.github.jeaneth1.thyroid_project.model.RiskAssessmentModel; // Ensure 
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 
 public class AppController {
     private MainFrame mainFrame;
@@ -18,6 +22,22 @@ public class AppController {
     public void setMainFrame(MainFrame frame) {
         this.mainFrame = frame;
         System.out.println("AppController linked to MainFrame.");
+    }
+
+    /** Very simple CSV reader — prints each cell of each line.*/
+    public void loadCsvSimple(String filePath) {
+    File csvFile = new File(filePath);
+    try (Scanner scanner = new Scanner(csvFile)) {
+        while (scanner.hasNextLine()) {
+            String[] cells = scanner.nextLine().split(",");
+            for (String cell : cells) {
+                System.out.print(cell.trim() + " | ");
+            }
+            System.out.println();
+        }
+    } catch (FileNotFoundException e) {
+        System.err.println("CSV file not found at: " + filePath);
+    }
     }
 
     public void processUserData(
