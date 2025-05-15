@@ -7,6 +7,9 @@ import javax.swing.JScrollPane;// Displaying error message
 import java.awt.BorderLayout; //to make the text area scrollable
 import java.awt.Color;//for setting text color (red for those erros)
 import java.util.List; // so we can have a list of errors
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import java.awt.Font;
 
 
 import com.github.jeaneth1.thyroid_project.controller.AppController;
@@ -17,6 +20,8 @@ public class MainFrame extends JFrame {
     private InputPanel inputPanel; //Decalre an instance variable 
     private AppController appController;
     private JTextArea errorTextArea;
+    private JLabel resultLabel; // Label to display the assessment result
+
 
 
     public MainFrame(AppController controller){
@@ -34,7 +39,7 @@ public class MainFrame extends JFrame {
         if (this.appController == null){
             System.err.println("MainFrame Constructor: Warning AppController recently been made");
         }
-        
+
         //Creating an instance of our InputPanel AND add input panel
         inputPanel = new InputPanel(this.appController);
         add(inputPanel, BorderLayout.CENTER);
@@ -48,6 +53,14 @@ public class MainFrame extends JFrame {
         //Allow the window to appear in the middle of the screen
         setLocationRelativeTo(null);
 
+        //Create a panel for results and errors
+        JPanel bottomPanel= new JPanel(new BorderLayout());
+
+        //Result Display Area
+        resultLabel = new JLabel("Assessment Result: [Pending]", JLabel.CENTER);
+        resultLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        bottomPanel.add(resultLabel, BorderLayout.NORTH);
+
 
         
         //Create and Configure the error display area
@@ -57,8 +70,11 @@ public class MainFrame extends JFrame {
         errorTextArea.setWrapStyleWord(true);
         errorTextArea.setForeground(Color.RED);
         JScrollPane errorScrollPane= new JScrollPane(errorTextArea); // the power of scrollbar
+        bottomPanel.add(errorScrollPane, BorderLayout.CENTER);
 
-        add(errorScrollPane, BorderLayout.SOUTH);
+        add(bottomPanel, BorderLayout.SOUTH);
+
+        
     }
     public void displayErrors(List<String> errors){
         errorTextArea.setText("");
@@ -69,9 +85,36 @@ public class MainFrame extends JFrame {
             }
             errorTextArea.setText(sb.toString());
         }
+        errorTextArea.revalidate();
+        errorTextArea.repaint();
     }
 
     public void clearErrors(){
         errorTextArea.setText("");
+        errorTextArea.revalidate();
+        errorTextArea.repaint();
+    }
+    public void displayAssessmentResult(String result){
+         if (result != null && !result.isEmpty()) {
+                resultLabel.setText("Assessment Result: " + result);
+
+                String lowerCaseResult = result.toLowerCase();
+                if (lowerCaseResult.contains("high risk")) {
+                    resultLabel.setForeground(Color.RED);
+                } else if (lowerCaseResult.contains("low risk")) {
+                    resultLabel.setForeground(new Color(0, 128, 0)); // Dark Green
+                } else if (result.toLowerCase().contains("pending") || result.toLowerCase().contains("not available") || result.toLowerCase().contains("error") || result.toLowerCase().contains("cancelled")) {
+                    resultLabel.setForeground(Color.BLUE);
+                } else {
+                    resultLabel.setForeground(Color.BLACK);
+                }
+                } else {
+                    resultLabel.setText("Assessment Result: [Not Available]");
+                    resultLabel.setForeground(Color.GRAY);
+                }
+                // Crucial for UI update after changing properties
+                resultLabel.revalidate();
+                resultLabel.repaint();
+                System.out.println("MainFrame: resultLabel text set to: " + resultLabel.getText() + " with color: " + resultLabel.getForeground());
     }
 }
