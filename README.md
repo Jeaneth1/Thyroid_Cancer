@@ -2,6 +2,8 @@
 
 A Java-based machine-learning application that predicts thyroid cancer risk using a Random Forest classifier. The system ingests patient risk‑factor data from CSV, trains a robust model, and delivers real‑time risk predictions along with personalized health recommendations.
 
+First, please be sure to be on the main branch to see our code
+
 Features
 High/low Risk Prediction
 Classifies patients as high‐risk or low‐risk based on demographic and risk factors.
