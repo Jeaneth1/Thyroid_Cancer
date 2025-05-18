@@ -30,9 +30,12 @@ Disk space for CSV datasets
 Installation
 Clone the repository
 
-git clone https://github.com/YourUsername/thyroid-cancer-prediction.git
+git clone https://github.com/YourUsername/Thyroid_Cancer.git
 
-cd thyroid-cancer-prediction
+cd Thyroid_Cancer
+
+Build with Maven
+mvn clean package
 
 Enter patient data
 
