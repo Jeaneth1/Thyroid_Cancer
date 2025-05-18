@@ -1,0 +1,25 @@
+{
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "cSpell.words": [
+        "thyrohealth"
+    ]
+
+
+   ,
+   
+   "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Run ThyroHealth",
+      "request": "launch",
+      "mainClass": "com.thyrohealth.MainApp",
+      "projectName": "thyrohealth"
+    }
+],
+"java.debug.settings.onBuildFailureProceed": true
+}
+
+
+  
+

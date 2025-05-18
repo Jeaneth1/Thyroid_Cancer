@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project 
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+      http://maven.apache.org/POM/4.0.0 
+      http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <!-- POM model version -->
+  <modelVersion>4.0.0</modelVersion>
+
+  <!-- Your coordinates -->
+  <groupId>com.thyrohealth</groupId>
+  <artifactId>thyrohealth</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
+  <!-- Java version -->
+  <properties>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+  </properties>
+
+  <!-- All your dependencies in one block -->
+  <dependencies>
+    <!-- Weka for RandomForest, CSVLoader, Filters, etc. -->
+    <dependency>
+      <groupId>nz.ac.waikato.cms.weka</groupId>
+      <artifactId>weka-stable</artifactId>
+      <version>3.8.6</version>
+    </dependency>
+
+    <!-- JUnit 5 API for writing tests -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>5.9.3</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- JUnit 5 Engine to run the tests -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>5.9.3</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <!-- Build plugins: exec for running your GUI, surefire for tests -->
+  <build>
+    <plugins>
+      <!-- Exec plugin to launch MainApp via mvn exec:java -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.1.0</version>
+        <configuration>
+          <mainClass>com.thyrohealth.MainApp</mainClass>
+        </configuration>
+      </plugin>
+
+      <!-- Surefire plugin to run JUnit 5 tests -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.0.0-M7</version>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
